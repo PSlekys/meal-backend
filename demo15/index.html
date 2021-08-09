@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+  </head>
+  <body>
+    <a href="add.html">Add item</a>
+    <h1>Meals:</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Meal</th>
+          <th>Price (Eur)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      const table = document.querySelector("tbody");
+
+      fetch("http://localhost:8080")
+        .then((res) => res.json())
+        .then((data) => displayTable(data))
+        .catch((e) => console.log(e));
+
+      function displayTable(data) {
+        data.forEach((item) => {
+          const tr = table.insertRow();
+
+          const td1 = tr.insertCell();
+          td1.textContent = item.name;
+
+          const td2 = tr.insertCell();
+          td2.textContent = item.price.toFixed(2);
+        });
+      }
+    </script>
+  </body>
+</html>
