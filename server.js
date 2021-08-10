@@ -7,11 +7,11 @@ app.use(express.json());
 
 let meals = [];
 
-app.get("/", (req, res) => {
+app.get("/meals", (req, res) => {
   res.send(meals);
 });
 
-app.post("/", (req, res) => {
+app.post("/meals", (req, res) => {
   if (!req.body.name.trim() || !req.body.price) {
     return res.status(400).send({ error: "Incorrect data passed" });
   }
@@ -25,7 +25,7 @@ app.post("/", (req, res) => {
   res.send({ msg: "Meal added" });
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/meals/:id", (req, res) => {
   meals = meals.filter((x) => x.id !== Number(req.params.id));
   res.send({ msg: "Meal deleted" });
 });
